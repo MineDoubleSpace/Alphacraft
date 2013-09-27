@@ -1,0 +1,66 @@
+name: Alphacraft
+main: co.alphacraft.main.Plugin
+version: 1.0
+description: Alphacraft main plugin
+author: MDS
+commands:
+  warn:
+    description: Warn player/ punish player
+  coins:
+    description: coins command
+  heal:
+    description: heal player
+  motd:
+    description: change server MOTD
+  warp:
+    description: warp player
+  delwarp:
+    description: remove selected warp
+  setwarp:
+    description: set player location as a warp
+  pay:
+    description: Pay Player
+  fly:
+    description: Toggle fly mode to player
+  home:
+    description: Teleport player to home
+  ip:
+    description: Checking player ip
+  spawn:
+    description: Teleport player to spawn
+  report:
+    description: Report Players/bugs
+  read:
+    description: Report Players/bugs
+  god:
+    description: Toggle god mode for player
+  afk:
+    description: Toggle afk for player
+  gmc:
+    description: Set gamemode to creative
+  gms:
+    description: Set gamemode to survival
+  gamemode:
+    description: Set gamemode to survival
+    aliases: gm
+  rules:
+    description: Send rules to player
+  kill:
+    description: kill target player
+  killall:
+    description: remove all entities
+  fp:
+    description: force player to chat or profome a command
+  broadcast:
+    description: broadcast message
+  day:
+    description: set time to day
+  night:
+    description: set time to night
+  anouncer:
+    description: Main command for anouncer
+  i:
+    description: Give item to Player
+permissions:
+   alpha.shop.create:
+    description: create shop
