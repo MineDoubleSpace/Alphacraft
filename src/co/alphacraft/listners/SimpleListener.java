@@ -39,33 +39,23 @@ public class SimpleListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (s.getPData().getConfigurationSection(player.getName()) != null) {
-			s.getPData().set(player.getName() + ".ip",event.getPlayer().getAddress().getHostName());
-			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', "&7[&a✱&7] " + "&6" + player.getName()+ " &ajoined AlphaCraft!"));
+			s.getPData().set(player.getName() + ".ip", event.getPlayer().getAddress().getHostName());
+			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', "&7[&a✱&7] " + "&6" + player.getName() + " &ajoined AlphaCraft!"));
 			c.coinAddNull(player.getName(), "2");
-			player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD+ "2 GOLD COINS added!");
+			player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "2 GOLD COINS added!");
 			return;
 		} else {
-			World w = Bukkit.getServer().getWorld(
-					s.getHome().getString("spawn.world"));
-			double x = s.getHome().getInt("spawn.x"), y = s.getHome().getInt(
-					"spawn.y"), z = s.getHome().getInt("spawn.z"), yaw1 = s
-					.getHome().getInt("spawn.yaw"), pitch1 = s.getHome()
-					.getInt("spawn.pitch");
+			World w = Bukkit.getServer().getWorld(s.getHome().getString("spawn.world"));
+			double x = s.getHome().getInt("spawn.x"), y = s.getHome().getInt("spawn.y"), z = s.getHome().getInt("spawn.z"), yaw1 = s.getHome().getInt("spawn.yaw"),
+					pitch1 = s.getHome().getInt("spawn.pitch");
 			float yaw = (float) yaw1;
 			float pitch = (float) pitch1;
 			player.teleport(new Location(w, x, y, z, yaw, pitch));
-			player.sendMessage(ChatColor.GREEN + "Hi " + ChatColor.GOLD + ""
-					+ ChatColor.BOLD + player.getName() + ChatColor.GREEN
-					+ " Welcome to Alphacraft! ");
+			player.sendMessage(ChatColor.GREEN + "Hi " + ChatColor.GOLD + "" + ChatColor.BOLD + player.getName() + ChatColor.GREEN + " Welcome to Alphacraft! ");
 			c.coinAddNull(player.getName(), "30");
-			player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD
-					+ "30 GOLD COINS added!" + ChatColor.AQUA + ""
-					+ ChatColor.ITALIC + " '/coins' to check your GOLD COINS'");
-			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&',
-					"&7[&a✱&7] " + "&6" + player.getName()
-							+ " &ajoined AlphaCraft!"));
-			s.getPData().set(player.getName() + ".ip",
-					event.getPlayer().getAddress().getHostName());
+			player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "30 GOLD COINS added!" + ChatColor.AQUA + "" + ChatColor.ITALIC + " '/coins' to check your GOLD COINS'");
+			event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', "&7[&a✱&7] " + "&6" + player.getName() + " &ajoined AlphaCraft!"));
+			s.getPData().set(player.getName() + ".ip", event.getPlayer().getAddress().getHostName());
 			starterKit(player);
 			s.savePData();
 			return;
@@ -75,8 +65,7 @@ public class SimpleListener implements Listener {
 	@EventHandler
 	public void onPlayerLeave(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
-		event.setQuitMessage(ChatColor.translateAlternateColorCodes('&',
-				"&7[&c✱&7] " + "&6" + player.getName() + " &cleft AlphaCraft!"));
+		event.setQuitMessage(ChatColor.translateAlternateColorCodes('&', "&7[&c✱&7] " + "&6" + player.getName() + " &cleft AlphaCraft!"));
 	}
 
 	// God mode check
@@ -93,77 +82,73 @@ public class SimpleListener implements Listener {
 	// MotdCheck Event
 	@EventHandler()
 	public void motdCheck(ServerListPingEvent event) {
-		event.setMotd(ChatColor.translateAlternateColorCodes('&', s.getConfig()
-				.getString("server.motd")));
+		event.setMotd(ChatColor.translateAlternateColorCodes('&', s.getConfig().getString("server.motd")));
 	}
-	
+
 	@EventHandler
-	public void opcheck(PlayerCommandPreprocessEvent event){
-		if (event.getMessage().contains("/op")){
-			if (!event.getPlayer().getName().equalsIgnoreCase("MineDoubleSpace")){
+	public void opcheck(PlayerCommandPreprocessEvent event) {
+		if (event.getMessage().contains("/op")) {
+			if (!event.getPlayer().getName().equalsIgnoreCase("MineDoubleSpace")) {
 				event.getPlayer().sendMessage(ChatColor.DARK_RED + "You may not take or give OP!");
 				event.setCancelled(true);
 				return;
 			}
-			
+
 		}
 	}
-	
-	@SuppressWarnings("deprecation")
-	private void starterKit(Player p){
+
+	private void starterKit(Player p) {
 		p.getInventory().setBoots(new ItemStack(Material.LEATHER_BOOTS));
 		p.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
 		p.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
 		p.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
 		ItemStack sword = new ItemStack(Material.IRON_SWORD, 1);
-		ItemMeta meta =sword.getItemMeta();
+		ItemMeta meta = sword.getItemMeta();
 		meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-		meta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD +  "Sword of "+ ChatColor.GOLD + ""
-							+ ChatColor.GOLD + p.getName()+ "!");
+		meta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "Sword of " + ChatColor.GOLD + "" + ChatColor.GOLD + p.getName() + "!");
 		sword.setItemMeta(meta);
 		p.getInventory().addItem(sword);
 		p.getInventory().addItem(new ItemStack(Material.BAKED_POTATO, 28));
-//		update call
+		//		update call
 		p.updateInventory();
 	}
-	
+
 	BukkitScheduler b = Bukkit.getScheduler();
-	
+
 	@EventHandler
-	public void onPlayerJoinGod(PlayerJoinEvent e){
+	public void onPlayerJoinGod(PlayerJoinEvent e) {
 		final Player player = e.getPlayer();
 		if (s.getPData().getConfigurationSection(player.getName()) != null) {
 			GodCommand.setGod(player);
 			b.scheduleSyncDelayedTask(plugin, new Runnable() {
-				
+
 				@Override
 				public void run() {
 					GodCommand.removeGod(player);
 				}
 			}, 200L);
-			
-			
-		}else{
+
+		} else {
 			player.sendMessage(ChatColor.BLUE + "You are invulnerable for 30 minutes!");
 			GodCommand.setGod(player);
 			b.scheduleSyncDelayedTask(plugin, new Runnable() {
-				
+
 				@Override
 				public void run() {
 					GodCommand.removeGod(player);
 				}
 			}, 36000L);
 		}
-		
+
 	}
-	
+
 	@EventHandler
-	public void onPlayerleaveGod(PlayerQuitEvent event){
+	public void onPlayerleaveGod(PlayerQuitEvent event) {
 		GodCommand.removeGod(event.getPlayer());
 	}
-	
+
 	@EventHandler
-	public void onBlockBreak(BlockBreakEvent event){
+	public void onBlockBreak(BlockBreakEvent event) {
 		return;
 	}
 }

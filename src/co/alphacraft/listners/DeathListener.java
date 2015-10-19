@@ -1,11 +1,7 @@
 package co.alphacraft.listners;
 
-import net.minecraft.server.v1_6_R2.Packet205ClientCommand;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_6_R2.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -56,23 +52,6 @@ public class DeathListener implements Listener {
 		}
 	}
 	
-	
-	@EventHandler
-	public void autoRespawn1(final PlayerDeathEvent e){
-		autoRespawn(e.getEntity());
-	}
-	
-	public static void autoRespawn(final Player player){
-			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			@Override
-			public void run() {
-				Packet205ClientCommand packet = new Packet205ClientCommand();
-				packet.a = 1;
-				((CraftPlayer)player).getHandle().playerConnection.a(packet);
-			}
-		}, 10L);
-		
-	}
 	
 
 }
