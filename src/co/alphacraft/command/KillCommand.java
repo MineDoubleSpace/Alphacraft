@@ -15,7 +15,6 @@ import org.bukkit.entity.Slime;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Zombie;
 
-import co.alphacraft.listners.DeathListener;
 import co.alphacraft.main.Plugin;
 
 
@@ -38,7 +37,6 @@ public class KillCommand implements CommandExecutor {
 			if (sender instanceof Player) {
 				if (args.length == 0) {
 					((Player) sender).setHealth(0.0);
-					DeathListener.autoRespawn((Player) sender);
 					return true;
 				} else if (args.length == 1) {
 					if (!sender.hasPermission("aplha.kill.other")) {
@@ -52,7 +50,6 @@ public class KillCommand implements CommandExecutor {
 						return true;
 					}
 					target.setHealth(0.0);
-					DeathListener.autoRespawn(target);
 					return true;
 				}
 			}
