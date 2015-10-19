@@ -22,23 +22,20 @@ public class CoinsCommand implements CommandExecutor {
 	SettingsManager s = SettingsManager.getInstance();
 	CoinsManager c = CoinsManager.getInstance();
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String lable,
-			String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("coins")) {
 			if (args.length == 0) {
 				Player player = (Player) sender;
 				c.sendTotal(player);
 				return true;
 			}
-			final OfflinePlayer target = Bukkit.getServer().getOfflinePlayer(
-					args[0]);
+			final OfflinePlayer target = Bukkit.getServer().getOfflinePlayer(args[0]);
 
 			if (args.length == 1) {
 				if (s.getPData().getString(target.getName() + ".coins") == null) {
-					sender.sendMessage(ChatColor.DARK_RED + "Player "
-							+ ChatColor.GOLD + "" + ChatColor.BOLD + args[0]
-							+ ChatColor.DARK_RED + " Not Found");
+					sender.sendMessage(ChatColor.DARK_RED + "Player " + ChatColor.GOLD + "" + ChatColor.BOLD + args[0] + ChatColor.DARK_RED + " Not Found");
 					return true;
 				} else if (args.length == 1) {
 					c.sendTotalOffline(target, sender);
@@ -51,8 +48,7 @@ public class CoinsCommand implements CommandExecutor {
 					c.coinSet(sender, args[1], args[2]);
 					return true;
 				}
-				sender.sendMessage(ChatColor.DARK_RED
-						+ "You don't have permissions to do this!");
+				sender.sendMessage(ChatColor.DARK_RED + "You don't have permissions to do this!");
 				return true;
 			}
 
@@ -61,8 +57,7 @@ public class CoinsCommand implements CommandExecutor {
 					c.coinAdd(sender, args[1], args[2]);
 					return true;
 				}
-				sender.sendMessage(ChatColor.DARK_RED
-						+ "You don't have permissions to do this!");
+				sender.sendMessage(ChatColor.DARK_RED + "You don't have permissions to do this!");
 				return true;
 			}
 
